@@ -36,7 +36,7 @@ class TestNJ_tree(unittest.TestCase):
         tree = NJ_tree().create_tree(n, m)
         self.assertEqual(len(tree.clade), 0)
         
-    def test_bed_matrix(self):
+    def test_bad_matrix(self):
         n, m = read_matrix('tests/test_bad_matrix.txt')
         with self.assertRaises(ValueError):
             tree = NJ_tree().create_tree(n, m)

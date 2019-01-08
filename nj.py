@@ -11,7 +11,7 @@ class NJ_tree:
 	def __init__(self):
 		self.tree = None
 
-	def vizualize(self):
+	def visualize(self):
 		if self.tree != None:
 			Phylo.draw(self.tree)
 

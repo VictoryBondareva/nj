@@ -22,9 +22,6 @@ class NJ_tree:
 		distance_matrix = DistanceMatrix(names, matrix)
 		dm = copy.deepcopy(distance_matrix)
 		clades = [BaseTree.Clade(None, name) for name in dm.names]
-
-		# print(clades)
-		# print(dm)
 		# clades[0].clades.append(clades[2])
 		while len(clades) != 1:
 			q_matrix = []
@@ -38,7 +35,6 @@ class NJ_tree:
 					tmp.append((len(dm) - 2)*j - sum(dm[ind_i]) - sum(dm[ind_j]))
 				q_matrix.append(tmp)
 			q_matrix = DistanceMatrix(q_names, q_matrix)
-			# print(q_matrix)
 
 			min_i = float('Inf')
 			min_j = float('Inf')
@@ -49,7 +45,6 @@ class NJ_tree:
 						q_min = j
 						min_i = ind_i
 						min_j = ind_j
-			# print(q_min, min_i, min_j)
 
 			if len(clades) == 2:
 				# print('c:', clade_j)
@@ -58,20 +53,17 @@ class NJ_tree:
 					clade_j.branch_length = dm[min_i][min_j]
 					clades[min_i].clades.append(clade_j)
 					del clades[min_j]
-					# print(clades)
 					break
 				if min_i == 1:
 					clade_i = clades[min_i]
 					clade_i.branch_length = dm[min_i][min_j]
 					clades[min_j].clades.append(clade_i)
 					del clades[min_i]
-					# print(clades)
 					break
 
 
 			dist_i = 0.5*dm[min_i][min_j] + (sum(dm[min_i]) - sum(dm[min_j]))/(2*(len(dm) - 2))
 			dist_j = dm[min_i][min_j] - dist_i
-			# print(dist_i, dist_j)
 
 			clade_i = clades[min_i]
 			clade_j = clades[min_j]
